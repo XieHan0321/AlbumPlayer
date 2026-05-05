@@ -1,0 +1,317 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f4efe7;
+  color: #222;
+  min-height: 100vh;
+}
+
+/* Header */
+
+.site-header {
+  text-align: center;
+  padding: 32px 20px 16px;
+}
+
+.site-header h1 {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.site-header p {
+  color: #666;
+}
+
+/* Navigation */
+
+.site-nav ul {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  padding: 16px;
+}
+
+.site-nav a {
+  color: #333;
+  font-weight: 600;
+}
+
+/* Main Layout */
+
+.album-container {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 32px;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 32px 20px;
+}
+
+/* Album Player */
+
+.album-player {
+  background: #fffaf2;
+  border-radius: 28px;
+  padding: 32px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.album-artwork {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.album-cover {
+  width: 320px;
+  max-width: 100%;
+  border-radius: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+}
+
+.album-info {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.album-label {
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #9a6b3f;
+  margin-bottom: 8px;
+}
+
+.album-info h2 {
+  font-size: 28px;
+  margin-bottom: 6px;
+}
+
+#artist-name {
+  color: #777;
+  margin-bottom: 8px;
+}
+
+#now-playing {
+  font-weight: 700;
+}
+
+/* Time and Progress */
+
+.time-display {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #666;
+  margin-top: 8px;
+}
+
+.progress-bar {
+  width: 100%;
+  max-width: 420px;
+  height: 8px;
+  background: #ddd2c4;
+  border-radius: 999px;
+  margin: 10px 0 24px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+#progress-bar-fill {
+  display: block;
+  width: 0%;
+  height: 100%;
+  background: #7a4f2a;
+  border-radius: 999px;
+}
+
+/* Main Controls */
+
+.custom-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+  margin-bottom: 20px;
+}
+
+.control-btn,
+.icon-btn {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #efe3d3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.main-btn {
+  width: 64px;
+  height: 64px;
+  background: #7a4f2a;
+}
+
+.main-btn img {
+  width: 32px;
+  height: 32px;
+  filter: brightness(0) invert(1);
+}
+
+.control-btn img,
+.icon-btn img {
+  width: 26px;
+  height: 26px;
+}
+
+.control-btn:hover,
+.icon-btn:hover {
+  background: #e0cbb6;
+  transform: scale(1.05);
+}
+
+.main-btn:hover {
+  background: #5f3c1f;
+}
+
+button:active {
+  transform: scale(0.94);
+}
+
+/* Extra Controls */
+
+.extra-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.active-control {
+  background: #7a4f2a;
+}
+
+.active-control img {
+  filter: brightness(0) invert(1);
+}
+
+/* Volume */
+
+.volume-container {
+  display: none;
+  margin: 8px 0 16px;
+}
+
+.volume-container.show-volume {
+  display: block;
+}
+
+#volume-slider {
+  width: 180px;
+}
+
+/* Feedback */
+
+.feedback-panel {
+  text-align: center;
+  color: #666;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* Tracklist */
+
+.tracklist-section {
+  background: #fffaf2;
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
+}
+
+.tracklist-section h2 {
+  font-size: 24px;
+  margin-bottom: 18px;
+}
+
+.track-list li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  border-radius: 14px;
+  cursor: pointer;
+  margin-bottom: 8px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.track-list span {
+  color: #9a6b3f;
+  font-weight: 700;
+}
+
+.track-list button {
+  color: inherit;
+  font-size: 15px;
+  text-align: left;
+}
+
+.track-list li:hover {
+  background: #efe3d3;
+}
+
+.track-list li.active-track {
+  background: #7a4f2a;
+  color: white;
+}
+
+.track-list li.active-track span {
+  color: white;
+}
+
+/* Description */
+
+.album-description {
+  grid-column: 1 / -1;
+  background: #fffaf2;
+  border-radius: 24px;
+  padding: 24px;
+  line-height: 1.6;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+}
+
+.album-description h2 {
+  margin-bottom: 12px;
+}
+
+/* Footer */
+
+.site-footer {
+  text-align: center;
+  padding: 24px;
+  color: #777;
+}
+
+/* Responsive Layout */
+
+@media (max-width: 800px) {
+  .album-container {
+    grid-template-columns: 1fr;
+  }
+
+  .site-nav ul {
+    gap: 18px;
+  }
+
+  .album-cover {
+    width: 260px;
+     transition: opacity 0.3s ease;
+  }
+}
