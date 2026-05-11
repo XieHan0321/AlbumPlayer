@@ -94,3 +94,77 @@ function loadTrack(index) {
   trackListItems.forEach((item) => {
     item.classList.remove("active-track");
   });
+
+    trackListItems[currentTrackIndex].classList.add("active-track");
+
+  playerStatus.textContent = "Loaded: " + tracks[currentTrackIndex].title;
+}
+
+function togglePlayPause() {
+  if (audio.paused) {
+    audio.play();
+  } else {
+    audio.pause();
+  }
+}
+
+function playNextTrack() {
+  if (isShuffleOn) {
+    currentTrackIndex = getRandomTrackIndex();
+  } else {
+    currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
+  }
+
+  loadTrack(currentTrackIndex);
+  audio.play();
+}
+
+function playPreviousTrack() {
+  currentTrackIndex =
+    (currentTrackIndex - 1 + tracks.length) % tracks.length;
+
+  loadTrack(currentTrackIndex);
+  audio.play();
+}
+
+function getRandomTrackIndex() {
+  let randomIndex = Math.floor(Math.random() * tracks.length);
+
+  while (randomIndex === currentTrackIndex && tracks.length > 1) {
+    randomIndex = Math.floor(Math.random() * tracks.length);
+  }
+
+  return randomIndex;
+}
+
+function updateProgress() {
+  if (audio.duration) {
+    const progressPercent = (audio.currentTime / audio.duration) * 100;
+    progressFill.style.width = progressPercent + "%";
+
+    currentTimeText.textContent = formatTime(audio.currentTime);
+    durationText.textContent = formatTime(audio.duration);
+  }
+}
+
+function seekAudio(event) {
+  const barWidth = progressBar.clientWidth;
+  const clickPosition = event.offsetX;
+
+  audio.currentTime = (clickPosition / barWidth) * audio.duration;
+}
+
+function formatTime(time) {
+  if (isNaN(time)) {
+    return "0:00";
+  }
+
+  const minutes = Math.floor(time / 60);
+  const seconds = Math.floor(time % 60);
+
+  return minutes + ":" + (seconds < 10 ? "0" + seconds : seconds);
+}
+
+function toggleVolumeControl() {
+  volumeContainer.classList.toggle("show-volume");
+}
