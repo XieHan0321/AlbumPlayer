@@ -168,3 +168,89 @@ function formatTime(time) {
 function toggleVolumeControl() {
   volumeContainer.classList.toggle("show-volume");
 }
+
+function updateVolume() {
+  audio.volume = volumeSlider.value;
+
+  if (audio.volume === 0) {
+    volumeImg.src = "icons/icons8-no-audio-30.png";
+    playerStatus.textContent = "Muted";
+  } else {
+    volumeImg.src = "icons/icons8-audio-30.apng.png";
+    playerStatus.textContent = "Volume: " + Math.round(audio.volume * 100) + "%";
+  }
+}
+
+function toggleLoop() {
+  isLoopOn = !isLoopOn;
+  audio.loop = isLoopOn;
+
+  loopBtn.classList.toggle("active-control", isLoopOn);
+  loopBtn.setAttribute("aria-pressed", isLoopOn);
+
+  updateModeStatus();
+}
+
+function toggleShuffle() {
+  isShuffleOn = !isShuffleOn;
+
+  shuffleBtn.classList.toggle("active-control", isShuffleOn);
+  shuffleBtn.setAttribute("aria-pressed", isShuffleOn);
+
+  updateModeStatus();
+}
+
+function updateModeStatus() {
+  const loopText = isLoopOn ? "Loop On" : "Loop Off";
+  const shuffleText = isShuffleOn ? "Shuffle On" : "Shuffle Off";
+
+  modeStatus.textContent = loopText + " · " + shuffleText;
+}
+
+function addLike() {
+  likes++;
+  likeCount.textContent = "Total likes: " + likes;
+  playerStatus.textContent = "Liked this track";
+}
+
+playPauseBtn.addEventListener("click", togglePlayPause);
+previousBtn.addEventListener("click", playPreviousTrack);
+nextBtn.addEventListener("click", playNextTrack);
+
+audio.addEventListener("play", () => {
+  playPauseImg.src = "icons/icons8-pause-30.png";
+  playerStatus.textContent = "Playing: " + tracks[currentTrackIndex].title;
+});
+
+audio.addEventListener("pause", () => {
+  playPauseImg.src = "icons/icons8-play-30.png";
+  playerStatus.textContent = "Paused";
+});
+
+audio.addEventListener("timeupdate", updateProgress);
+
+audio.addEventListener("ended", () => {
+  if (!isLoopOn) {
+    playNextTrack();
+  }
+});
+
+progressBar.addEventListener("click", seekAudio);
+
+volumeBtn.addEventListener("click", toggleVolumeControl);
+volumeSlider.addEventListener("input", updateVolume);
+
+loopBtn.addEventListener("click", toggleLoop);
+shuffleBtn.addEventListener("click", toggleShuffle);
+likeBtn.addEventListener("click", addLike);
+
+trackListItems.forEach((item) => {
+  item.addEventListener("click", () => {
+    const index = Number(item.dataset.index);
+    loadTrack(index);
+    audio.play();
+  });
+});
+
+loadTrack(currentTrackIndex);
+updateModeStatus();
